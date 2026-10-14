@@ -16,3 +16,6 @@ The following diagram illustrates the project architecture.
 DDl & DML in Sql for DBs
 - insert tables into the Datawarehouse 
 - bulk insert files into db schemas
+
+Dataflow 
+the flow of yr data where it comes from & where it goes 
