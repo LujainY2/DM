@@ -447,8 +447,47 @@ WHERE  CASE WHEN cid LIKE 'NAS%' THEN substring(cid,4,len(cid))
 END NOT IN (SELECT Distinct cst_key FROM silver.crm_cust_info)
 
 -- check bdates if there is higher than 100 yrs or in the future
--- nothing shows
 SELECT DISTINCT 
 bdate 
 from bronze.erp_cust_az12
-where bdate < '1924-01-01' and bdate > GETDATE()
+where bdate < '1924-01-01' or bdate > GETDATE()
+
+-- fix incorrect dates
+select 
+    CASE WHEN cid LIKE 'NAS%' THEN substring(cid,4,len(cid))
+	else cid
+END as cid,
+case when bdate > GETDATE() then null
+     ELSE bdate 
+END AS bdate ,
+gen
+from bronze.erp_cust_az12
+
+-- Data Standarization & Consistency
+-- noticed issues 
+Select DISTINCT gen 
+from bronze.erp_cust_az12
+
+-- FIX Data Standarization & Consistency
+Select DISTINCT 
+gen, -- old col
+CASE WHEN UPPER(TRIM(gen)) IN ('F','FEMALE') THEN 'Female'
+     WHEN UPPER(TRIM(gen)) IN ('M','MALE') THEN 'Male'
+	 ELSE 'n/a'
+END AS gen
+from bronze.erp_cust_az12
+
+-- full cleaning query & inserting itinto Silver Layer
+INSERT INTO silver.erp_cust_az12(cid,bdate,gen)
+select 
+    CASE WHEN cid LIKE 'NAS%' THEN substring(cid,4,len(cid))
+	else cid
+END as cid,
+case when bdate > GETDATE() then null
+     ELSE bdate 
+END AS bdate ,
+CASE WHEN UPPER(TRIM(gen)) IN ('F','FEMALE') THEN 'Female'
+     WHEN UPPER(TRIM(gen)) IN ('M','MALE') THEN 'Male'
+	 ELSE 'n/a'
+END AS gen
+from bronze.erp_cust_az12
