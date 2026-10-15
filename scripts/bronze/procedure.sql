@@ -19,22 +19,6 @@ use DataWarehouse;
 
 CREATE SCHEMA bronze;
 GO
-
--- rename 
-EXEC sp_rename 'bronze.sales_details', 'crm_sales_details';
-CREATE TABLE bronze.erp_loc_a101 (
-   cid nvarchar(50),
-   cntry nvarchar(50)
-
-);
-
-CREATE TABLE bronze.erp_px_cat_g1v2 (
-   id nvarchar(50),
-   cat nvarchar(50),
-   subcat nvarchar(50),
-   maintenance nvarchar(50),
-);
-
 ------------
 CREATE OR ALTER PROCEDURE bronze.load_bronze
 AS
