@@ -316,6 +316,6 @@ FROM bronze.crm_sales_details
 WHERE sls_order_dt > sls_ship_dt OR sls_order_dt > sls_due_dt
 
 -- check if sales = quantity * price
-SELECT sals_sales, sls_quantity, sls_price
-FROM bronze.crm_sales_detils 
+SELECT sls_sales, sls_quantity, sls_price
+FROM bronze.crm_sales_details 
 WHERE sls_sales != sls_quantity * sls_price
