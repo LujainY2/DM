@@ -10,6 +10,34 @@ use DataWarehouse
 print '------------------------------------------------'
 print '  Customers Table'
 print '------------------------------------------------'
+
+
+--  check duplicates and Nulls for id column 
+select cst_id, count(*)
+from bronze.crm_cust_info 
+group by cst_id 
+having count(*) >1
+
+-- check  
+select * from bronze.crm_cust_info
+where cst_id = 29466
+
+
+-- whitespaces
+select cst_first_name from bronze.crm_cust_info
+where cst_first_name != TRIM(cst_first_name)
+
+select cst_last_name from bronze.crm_cust_info
+where cst_last_name != TRIM(cst_last_name)
+
+-- Data Standarization & consistency 
+SELECT DISTINCT cst_gndr
+FROM bronze.crm_cust_info;
+SELECT DISTINCT cst_marital_status
+FROM bronze.crm_cust_info;
+
+
+-- Full modification needed on the columns
 ;WITH cte AS (
     SELECT *,
            ROW_NUMBER() OVER (
@@ -22,8 +50,8 @@ print '------------------------------------------------'
 INSERT INTO silver.crm_cust_info (
     cst_id,
     cst_key,
-    cst_first_name,
-    cst_last_name,
+    cst_firstname,
+    cst_lastname,
     cst_marital_status,
     cst_gndr,
     cst_create_date
@@ -46,6 +74,7 @@ SELECT
     cst_create_date
 FROM cte
 WHERE flag_last = 1;
+
 
 print '------------------------------------------------'
 print '  Produncts Table'
@@ -225,3 +254,11 @@ sls_sales,
 sls_quantity,
 sls_price
 FROM bronze.crm_sales_details
+
+-- Check invalid Dates
+-- Replace 0 Dates with Nulls
+select 
+nullif(sls_order_dt,0) sls_order_dt
+from bronze.crm_sales_details
+where sls_order_dt <=0
+
