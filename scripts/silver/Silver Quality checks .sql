@@ -7,11 +7,15 @@
       Checking the cleaned DB
 =============================================================
 */
-use DataWarehouse
 
+use DataWarehouse
+print '------------------------------------------------'
+print '  Customers Table'
+print '------------------------------------------------'
 
 -- Check the Silver Layer (Cleaned Data)
 select * from silver.crm_cust_info 
+
 --  check duplicates and Nulls for id column 
 select cst_id, count(*)
 from silver.crm_cust_info 
