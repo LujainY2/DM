@@ -12,6 +12,7 @@ go
 CREATE SCHEMA bronze;
 GO
 
+
 CREATE TABLE bronze.crm_cust_info (
     cst_id              INT,
     cst_key             NVARCHAR(50),
@@ -55,13 +56,12 @@ CREATE TABLE bronze.erp_cust_az12 (
 );
 GO
 CREATE TABLE bronze.erp_loc_a101 (
-   cid nvarchar(50),
-   cntry nvarchar(50)
+  cid nvarchar(50),
+   cntry nvarchar(50));
 
-);
-
+GO
 CREATE TABLE bronze.erp_px_cat_g1v2 (
-   id nvarchar(50),
+  id nvarchar(50),
    cat nvarchar(50),
    subcat nvarchar(50),
    maintenance nvarchar(50),
