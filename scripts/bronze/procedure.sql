@@ -1,3 +1,20 @@
+
+/*
+=============================================================
+  STORED PROCEDURE: bronze.load_bronze
+=============================================================
+  Description:
+      Loads raw data from CRM and ERP source files into
+      the Bronze layer tables.
+
+  Process:
+      1. Truncate Bronze tables.
+      2. Load data from source CSV files.
+      3. Track and print loading duration.
+=============================================================
+*/
+
+
 use DataWarehouse;
 
 CREATE SCHEMA bronze;

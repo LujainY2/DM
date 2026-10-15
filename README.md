@@ -4,8 +4,15 @@
 
 The following diagram illustrates the project architecture.
 
+- Tecnologies used 
+`Draw.io` `SQL server` `Visual Staudio` `Git` 
+
 - Project overFlow 
 ![Project Diagram](imgs/project_diagram.jpg)
+
+
+- Data integration(Tables Relationships)
+![Project Diagram](imgs/Data_integ.jpg)
 
 - Project Naming Conventions 
 
@@ -17,5 +24,16 @@ DDl & DML in Sql for DBs
 - insert tables into the Datawarehouse 
 - bulk insert files into db schemas
 
-Dataflow 
-the flow of yr data where it comes from & where it goes 
+
+
+2. 'Silver Layer 'Analyze src system
+
+- EDA
+- MetaData columns
+- Data Quality check (cleaning) - SQL 
+   1. Remove white spaces 
+   2. PK -> unique + not null
+   3. Data normalization & standarization
+   4. Handling missing Data
+   5. Removing Duplicates
+   6. Derived Columns

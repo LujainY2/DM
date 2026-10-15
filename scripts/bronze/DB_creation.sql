@@ -1,5 +1,14 @@
-use DataWarehouse;
 
+/*
+=============================================================
+  Script Name:    create_database.sql
+  Description:    Create the Data Warehouse database
+  Project:        Sales Data Warehouse
+=============================================================
+*/
+
+use DataWarehouse;
+go
 CREATE SCHEMA bronze;
 GO
 
