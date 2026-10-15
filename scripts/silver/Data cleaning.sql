@@ -538,3 +538,27 @@ CASE WHEN TRIM(cntry) = 'DE' THEN 'Germany'
 END AS cntry
 FROM bronze.erp_loc_a101
 ORDER BY cntry 
+
+print '------------------------------------------------'
+print '  ERP Categories of the Products'
+print '------------------------------------------------'
+
+select id, cat, subcat,maintenance
+from bronze.erp_px_cat_g1v2;
+
+-- Check white spaces
+-- no problems
+SELECT * FROM bronze.erp_px_cat_g1v2
+WHERE cat != TRIM(cat) or subcat != TRIM(subcat) or maintenance != TRIM(maintenance)
+
+-- Check Data Standarization & Consistency 
+-- no problems
+SELECT DISTINCT cat
+FROM bronze.erp_px_cat_g1v2
+
+-- Load the Table into Silver Layer 
+INSERT INTO silver.erp_px_cat_g1v2
+(id, cat, subcat, maintenance)
+SELECT 
+id, cat, subcat,maintenance 
+from bronze.erp_px_cat_g1v2
