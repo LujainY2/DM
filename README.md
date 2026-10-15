@@ -12,7 +12,7 @@ The following diagram illustrates the project architecture.
 
 
 - Data integration(Tables Relationships)
-![Project Diagram](imgs/Data_integ.jpg)
+![Project Diagram](imgs/Data_integ.png)
 
 - Project Naming Conventions 
 
