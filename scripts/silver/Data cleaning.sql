@@ -262,10 +262,6 @@ nullif(sls_order_dt,0) sls_order_dt
 from bronze.crm_sales_details
 where sls_order_dt <=0
 
-print '------------------------------------------------'
-print '  Orders Table'
-print '------------------------------------------------'
-
 -- Check for Invalid Dates
 SELECT
 NULLIF(sls_order_dt,0) sls_ship_dt
@@ -275,7 +271,25 @@ OR LEN(sls_order_dt) != 8
 OR sls_order_dt > 20500101
 OR sls_order_dt < 19000101
 
--- 
+--check as well ship & due column
+-- No problem found
+SELECT
+NULLIF(sls_ship_dt,0) sls_ship_dt
+FROM bronze.crm_sales_details
+WHERE sls_ship_dt <= 0
+OR LEN(sls_ship_dt) != 8
+OR sls_ship_dt > 20500101
+OR sls_ship_dt < 19000101
+-----
+SELECT
+NULLIF(sls_due_dt,0) sls_due_dt
+FROM bronze.crm_sales_details
+WHERE sls_due_dt <= 0
+OR LEN(sls_due_dt) != 8
+OR sls_due_dt > 20500101
+OR sls_due_dt < 19000101
+
+-- modification of Dates column values
 select 
 sls_ord_num,
 sls_prd_key,
@@ -286,26 +300,12 @@ END AS sls_order_dt,
 CASE When sls_ship_dt = 0 OR LEN(sls_ship_dt) != 8 THEN null
      else cast(cast(sls_ship_dt as varchar) as date)
 END AS sls_order_dt,
+CASE When sls_due_dt = 0 OR LEN(sls_due_dt) != 8 THEN null
+     else cast(cast(sls_due_dt as varchar) as date)
+END AS sls_order_dt,
   sls_ship_dt,
   sls_due_dt,
   sls_sales,
   sls_quantity,
   sls_price
-
---check as well ship & due column
--- No problem 
-SELECT
-NULLIF(sls_ship_dt,0) sls_ship_dt
-FROM bronze.crm_sales_details
-WHERE sls_ship_dt <= 0
-OR LEN(sls_ship_dt) != 8
-OR sls_ship_dt > 20500101
-OR sls_ship_dt < 19000101
------
-SELECT
-NULLIF(sls_due_dt,0) sls_ship_dt
-FROM bronze.crm_sales_details
-WHERE sls_ship_dt <= 0
-OR LEN(sls_ship_dt) != 8
-OR sls_ship_dt > 20500101
-OR sls_ship_dt < 19000101
+FROM bronze.crm_sales_details;
