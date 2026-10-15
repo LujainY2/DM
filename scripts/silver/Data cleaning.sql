@@ -413,3 +413,42 @@ END AS sls_sales,
     ELSE sls_price 
 END AS sls_price 
 from bronze.crm_sales_details
+
+print '------------------------------------------------'
+print '  ERP customers'
+print '------------------------------------------------'
+
+-- check the IDs cst_key in tables
+
+select * from bronze.erp_cust_az12;
+ 
+select * from silver.crm_cust_info;
+
+-- Cut off the not needed characters
+select 
+    CASE WHEN cid LIKE 'NAS%' THEN substring(cid,4,len(cid))
+	else cid
+END cid,
+	bdate,
+	gen 
+from bronze.erp_cust_az12;
+
+-- Check if there unmatched cids  
+-- nothing shows
+select 
+    CASE WHEN cid LIKE 'NAS%' THEN substring(cid,4,len(cid))
+	else cid
+END cid,
+	bdate,
+	gen 
+FROM bronze.erp_cust_az12
+WHERE  CASE WHEN cid LIKE 'NAS%' THEN substring(cid,4,len(cid))
+  else cid
+END NOT IN (SELECT Distinct cst_key FROM silver.crm_cust_info)
+
+-- check bdates if there is higher than 100 yrs or in the future
+-- nothing shows
+SELECT DISTINCT 
+bdate 
+from bronze.erp_cust_az12
+where bdate < '1924-01-01' and bdate > GETDATE()
