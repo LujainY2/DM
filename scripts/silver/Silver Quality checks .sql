@@ -119,3 +119,15 @@ from silver.erp_cust_az12
 -- final check in the whole table 
 SELECT * from silver.erp_cust_az12
 
+print '------------------------------------------------'
+print '  ERP customers Locations'
+print '------------------------------------------------'
+
+-- Check
+SELECT DISTINCT cntry
+FROM silver.erp_loc_a101
+
+-- final check in the whole table 
+SELECT * from silver.erp_loc_a101
+ORDER BY cntry;
+

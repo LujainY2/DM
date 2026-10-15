@@ -491,3 +491,50 @@ CASE WHEN UPPER(TRIM(gen)) IN ('F','FEMALE') THEN 'Female'
 	 ELSE 'n/a'
 END AS gen
 from bronze.erp_cust_az12
+
+print '------------------------------------------------'
+print '  ERP customers Locations'
+print '------------------------------------------------'
+
+select cid, cntry 
+from bronze.erp_loc_a101;
+
+-- check matched cid col
+select top 10 cid, cntry from bronze.erp_loc_a101
+
+select top 10 cst_key from silver.crm_cust_info
+
+-- fix unwanted '-' in cid 
+SELECT
+    REPLACE(cid, '-', '') AS cid
+FROM bronze.erp_loc_a101;
+
+-- check Data Standarization & Consistency 
+-- appreviation , nulls , empty 
+SELECT DISTINCT cntry 
+FROM bronze.erp_loc_a101
+ORDER BY cntry
+
+-- Fixing Data Standarization & Consistency 
+SELECT 
+REPLACE(cid,'-','') cid,
+CASE WHEN TRIM(cntry) = 'DE' THEN 'Germany'
+     WHEN TRIM(cntry) IN ('US','USA') THEN 'United States'
+	 WHEN TRIM(cntry) = '' or cntry IS NULL then 'n/a'
+	 ELSE TRIM(cntry)
+END AS cntry
+FROM bronze.erp_loc_a101
+ORDER BY cntry 
+
+-- Full script of modification 
+insert into silver.erp_loc_a101
+(cid,cntry)
+SELECT 
+REPLACE(cid,'-','') cid,
+CASE WHEN TRIM(cntry) = 'DE' THEN 'Germany'
+     WHEN TRIM(cntry) IN ('US','USA') THEN 'United States'
+	 WHEN TRIM(cntry) = '' or cntry IS NULL then 'n/a'
+	 ELSE TRIM(cntry)
+END AS cntry
+FROM bronze.erp_loc_a101
+ORDER BY cntry 
