@@ -303,9 +303,18 @@ END AS sls_order_dt,
 CASE When sls_due_dt = 0 OR LEN(sls_due_dt) != 8 THEN null
      else cast(cast(sls_due_dt as varchar) as date)
 END AS sls_order_dt,
-  sls_ship_dt,
-  sls_due_dt,
   sls_sales,
   sls_quantity,
   sls_price
 FROM bronze.crm_sales_details;
+
+-- Check for Invalid Date Orders
+-- NO problem found
+SELECT
+*
+FROM bronze.crm_sales_details
+WHERE sls_order_dt > sls_ship_dt OR sls_order_dt > sls_due_dt
+
+-
+
+*
