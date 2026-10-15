@@ -239,7 +239,7 @@ CAST(lead(prd_start_dt) over (partition by prd_key order by prd_start_dt)-1 AS D
 from bronze.crm_prd_info
 
 print '------------------------------------------------'
-print '  Sales Table'
+print '  Orders Table'
 print '------------------------------------------------'
 
 -- Data columns has wrong values
@@ -262,3 +262,41 @@ nullif(sls_order_dt,0) sls_order_dt
 from bronze.crm_sales_details
 where sls_order_dt <=0
 
+print '------------------------------------------------'
+print '  Orders Table'
+print '------------------------------------------------'
+
+-- Check for Invalid Dates
+SELECT
+NULLIF(sls_order_dt,0) sls_ship_dt
+FROM bronze.crm_sales_details
+WHERE sls_order_dt <= 0
+OR LEN(sls_order_dt) != 8
+OR sls_order_dt > 20500101
+OR sls_order_dt < 19000101
+
+-- 
+select 
+sls_ord_num,
+sls_prd_key,
+sls_cust_id,
+CASE When sls_order_dt = 0 OR LEN(sls_order_dt) != 8 THEN null
+     else cast(cast(sls_order_dt as varchar) as date)
+END AS sls_order_dt,
+CASE When sls_ship_dt = 0 OR LEN(sls_ship_dt) != 8 THEN null
+     else cast(cast(sls_ship_dt as varchar) as date)
+END AS sls_order_dt,
+  sls_ship_dt,
+  sls_due_dt,
+  sls_sales,
+  sls_quantity,
+  sls_price
+
+
+SELECT
+NULLIF(sls_ship_dt,0) sls_ship_dt
+FROM bronze.crm_sales_details
+WHERE sls_ship_dt <= 0
+OR LEN(sls_ship_dt) != 8
+OR sls_ship_dt > 20500101
+OR sls_ship_dt < 19000101
