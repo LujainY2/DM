@@ -100,3 +100,22 @@ ORDER BY sls_sales, sls_quantity, sls_price
 
 -- final check in the whole table 
 SELECT * FROM silver.crm_sales_details
+
+print '------------------------------------------------'
+print '  ERP customers'
+print '------------------------------------------------'
+
+-- identify out-of-Range Dates
+-- we keep old customers fine 
+select distinct bdate 
+from silver.erp_cust_az12
+where bdate < '1924-01-01' or bdate > GETDATE()
+
+
+-- Data Standarization & consistency 
+SELECT Distinct gen
+from silver.erp_cust_az12
+
+-- final check in the whole table 
+SELECT * from silver.erp_cust_az12
+
