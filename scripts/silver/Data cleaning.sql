@@ -208,3 +208,20 @@ END as prd_line,
 CAST(prd_start_dt AS DATE) AS prd_start_dt,
 CAST(lead(prd_start_dt) over (partition by prd_key order by prd_start_dt)-1 AS DATE) AS prd_end_dt
 from bronze.crm_prd_info
+
+print '------------------------------------------------'
+print '  Sales Table'
+print '------------------------------------------------'
+
+-- Data columns has wrong values
+SELECT
+sls_ord_num,
+sls_prd_key,
+sls_cust_id,
+sls_order_dt,
+sls_ship_dt,
+sls_due_dt,
+sls_sales,
+sls_quantity,
+sls_price
+FROM bronze.crm_sales_details
