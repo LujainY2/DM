@@ -16,6 +16,8 @@
 */
 use DataWarehouse;
 GO
+CREATE SCHEMA silver;
+GO
 CREATE OR ALTER PROCEDURE silver.load_silver
 AS
 BEGIN
