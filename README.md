@@ -68,7 +68,7 @@ Key activities:
 - Create derived columns when needed.
 - proSEDURE TO Load the cleaned and transformed data into the Silver schema.
 
-### 2. Silver Layer — Data Cleaning and Transformation
+### 2. Golden Layer — Data Cleaning and Transformation
 
 - Data Model
 - Joining Tables 
@@ -76,6 +76,8 @@ Key activities:
 - renaming cols (following the naming rules we putted )
 - columns order
 - START schema : connect fact table (`Sales`) with dimensions `products` `customers`  using surrogate keys AS Viwes
+
+![Data Integration](imgs/Data_model.png)
 
 ## Project Goals
 
