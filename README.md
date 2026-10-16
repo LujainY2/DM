@@ -10,12 +10,16 @@ The following diagram illustrates the overall project architecture, including th
 
 ![Project Architecture](imgs/project_diagram.jpg)
 
-## Technologies Used
+## Technologies & Tools
 
-- **Microsoft SQL Server** — Database creation, data storage, and SQL-based ETL processes.
-- **Visual Studio Code** — SQL script development and project management.
-- **Draw.io** — Architecture and data integration diagrams.
-- **Git** — Version control and source code management.
+| Technology | Category | Purpose |
+|---|---|---|
+| **Microsoft SQL Server** | Database & ETL | Database creation, data storage, and SQL-based data transformation |
+| **Visual Studio Code** | Development Environment | SQL script development and project organization |
+| **Draw.io** | Data Visualization | Designing data warehouse architecture and data integration diagrams |
+| **Git & GitHub** | Version Control | Source code management, version tracking, and project collaboration |
+
+
 
 ## Data Integration and Table Relationships
 
@@ -31,7 +35,7 @@ Consistent naming conventions are used for database objects, schemas, tables, an
 
 The data flow illustrates how data moves from the source systems through the warehouse layers, from initial ingestion to transformation and preparation for analytics. 
 
-![Data Integration](imgs/Data Flow.png)
+![Data Integration](imgs/DataFlow.png)
 
 ## Data Warehouse Layers
 
