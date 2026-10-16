@@ -75,6 +75,7 @@ Key activities:
 - integration 
 - renaming cols (following the naming rules we putted )
 - columns order
+- START schema : connect fact table (`Sales`) with dimensions `products` `customers`  using surrogate keys AS Viwes
 
 ## Project Goals
 
