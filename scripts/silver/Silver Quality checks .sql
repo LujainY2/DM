@@ -1,7 +1,7 @@
 
 /*
 =============================================================
-  QUALITY CHECK: silver layer
+  QUALITY CHECK: Silver layer
 =============================================================
   Description:
       Checking the cleaned DB

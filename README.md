@@ -66,7 +66,15 @@ Key activities:
 - Handle missing and invalid data.
 - Identify and remove duplicate records.
 - Create derived columns when needed.
-- Load the cleaned and transformed data into the Silver schema.
+- proSEDURE TO Load the cleaned and transformed data into the Silver schema.
+
+### 2. Silver Layer — Data Cleaning and Transformation
+
+- Data Model
+- Joining Tables 
+- integration 
+- renaming cols (following the naming rules we putted )
+- columns order
 
 ## Project Goals
 
