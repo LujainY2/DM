@@ -27,6 +27,12 @@ The following diagram illustrates the relationships between the tables and the i
 
 Consistent naming conventions are used for database objects, schemas, tables, and columns to improve readability and maintainability.
 
+## Data Flow
+
+The data flow illustrates how data moves from the source systems through the warehouse layers, from initial ingestion to transformation and preparation for analytics. 
+
+![Data Integration](imgs/Data Flow.png)
+
 ## Data Warehouse Layers
 
 ### 1. Bronze Layer — Raw Data Ingestion
